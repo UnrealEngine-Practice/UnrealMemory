@@ -36,6 +36,9 @@ void UMyGameInstance::Init()
 
 	NonUPropertyObj = NewObject<UStudent>();
 	UPropertyObj = NewObject<UStudent>();
+
+	NonUPropertyArr.Add(NewObject<UStudent>());
+	UPropertyArr.Add(NewObject<UStudent>());
 }
 
 void UMyGameInstance::Shutdown()
@@ -46,4 +49,9 @@ void UMyGameInstance::Shutdown()
 	CheckUObjectIsNull(UPropertyObj, TEXT("UPropertyObj"));
 	CheckUObjectIsValid(NonUPropertyObj, TEXT("NonUPropertyObj"));
 	CheckUObjectIsValid(UPropertyObj, TEXT("UPropertyObj"));
+	UE_LOG(LogTemp, Log, TEXT("========================================================"));
+	CheckUObjectIsNull(NonUPropertyArr[0], TEXT("NonUPropertyArr's Element"));
+	CheckUObjectIsNull(UPropertyArr[0], TEXT("UPropertyArr's Element"));
+	CheckUObjectIsValid(NonUPropertyArr[0], TEXT("NonUPropertyArr's Element"));
+	CheckUObjectIsValid(UPropertyArr[0], TEXT("UPropertyArr's Element"));
 }

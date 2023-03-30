@@ -22,4 +22,9 @@ private:
 
 	UPROPERTY()
 	TObjectPtr<class UStudent> UPropertyObj;
+
+	TArray<TObjectPtr<class UStudent>> NonUPropertyArr;
+	
+	UPROPERTY()
+	TArray<TObjectPtr<class UStudent>> UPropertyArr;
 };
