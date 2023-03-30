@@ -27,4 +27,6 @@ private:
 	
 	UPROPERTY()
 	TArray<TObjectPtr<class UStudent>> UPropertyArr;
+
+	class FStudentManager* StudentManager = nullptr;
 };

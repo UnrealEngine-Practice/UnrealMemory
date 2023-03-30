@@ -3,6 +3,7 @@
 
 #include "MyGameInstance.h"
 #include "Student.h"
+#include "StudentManager.h"
 
 void CheckUObjectIsValid(const UObject* InObject, const FString& InTag)
 {
@@ -14,7 +15,6 @@ void CheckUObjectIsValid(const UObject* InObject, const FString& InTag)
 	{
 		UE_LOG(LogTemp, Log, TEXT("[%s]유효하지 않은 오브젝트"), *InTag);
 	}
-	
 }
 
 void CheckUObjectIsNull(const UObject* InObject, const FString& InTag)
@@ -27,7 +27,6 @@ void CheckUObjectIsNull(const UObject* InObject, const FString& InTag)
 	{
 		UE_LOG(LogTemp, Log, TEXT("[%s]Non Null 오브젝트"), *InTag);
 	}
-	
 }
 
 void UMyGameInstance::Init()
@@ -39,19 +38,31 @@ void UMyGameInstance::Init()
 
 	NonUPropertyArr.Add(NewObject<UStudent>());
 	UPropertyArr.Add(NewObject<UStudent>());
+
+	StudentManager = new FStudentManager(NewObject<UStudent>());
 }
 
 void UMyGameInstance::Shutdown()
 {
 	Super::Shutdown();
+
+	const UStudent* StudentInManger = StudentManager->GetStudent();
+	
+	delete StudentManager;
+	StudentManager = nullptr;
 	
 	CheckUObjectIsNull(NonUPropertyObj, TEXT("NonUPropertyObj"));
 	CheckUObjectIsNull(UPropertyObj, TEXT("UPropertyObj"));
 	CheckUObjectIsValid(NonUPropertyObj, TEXT("NonUPropertyObj"));
 	CheckUObjectIsValid(UPropertyObj, TEXT("UPropertyObj"));
+
 	UE_LOG(LogTemp, Log, TEXT("========================================================"));
 	CheckUObjectIsNull(NonUPropertyArr[0], TEXT("NonUPropertyArr's Element"));
 	CheckUObjectIsNull(UPropertyArr[0], TEXT("UPropertyArr's Element"));
 	CheckUObjectIsValid(NonUPropertyArr[0], TEXT("NonUPropertyArr's Element"));
 	CheckUObjectIsValid(UPropertyArr[0], TEXT("UPropertyArr's Element"));
+
+	UE_LOG(LogTemp, Log, TEXT("========================================================"));
+	CheckUObjectIsNull(StudentInManger, TEXT("NonUPropertyArr's Element"));
+	CheckUObjectIsValid(StudentInManger, TEXT("NonUPropertyArr's Element"));
 }
